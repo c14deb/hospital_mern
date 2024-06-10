@@ -1,10 +1,10 @@
 import { User } from "../models/userSchema.js";
 import { catchAsyncErrors } from "./catchAsyncErrors.js";
-import ErrorHandler from "./error.js";
 import jwt from "jsonwebtoken";
+import ErrorHandler from "./errorMiddleware.js";
 
 export const isAdminAuthenticated = catchAsyncErrors(async (req, res, next) => {
-  const token = req.cookies.adminToken;
+  const token = req.cookies.AdminToken;
   if (!token) {
     return next(new ErrorHandler("Dashboard User is not authenticated!", 400));
   }
@@ -14,16 +14,14 @@ export const isAdminAuthenticated = catchAsyncErrors(async (req, res, next) => {
     return next(
       new ErrorHandler(
         `${req.user.role} not authorized for this resource!`,
-        403
-      )
-    );
+        403));
   }
   next();
 });
 
 export const isPatientAuthenticated = catchAsyncErrors(
   async (req, res, next) => {
-    const token = req.cookies.patientToken;
+    const token = req.cookies.PatientToken;
     if (!token) {
       return next(new ErrorHandler("User is not authenticated!", 400));
     }
@@ -31,11 +29,7 @@ export const isPatientAuthenticated = catchAsyncErrors(
     req.user = await User.findById(decoded.id);
     if (req.user.role !== "Patient") {
       return next(
-        new ErrorHandler(
-          `${req.user.role} not authorized for this resource!`,
-          403
-        )
-      );
+        new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403));
     }
     next();
   }

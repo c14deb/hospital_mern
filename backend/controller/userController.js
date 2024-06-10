@@ -65,6 +65,9 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   // });
 });
 
+
+
+
 export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   const { firstName, lastName, email, phone, password, gender, dob } = req.body;
 
@@ -100,3 +103,48 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
     message: "New Admin Registered",
   });
 });
+
+
+
+export const getAllDoctors = catchAsyncErrors(async(req, res, next)=> {
+  const doctors = await User.find({ role: "Doctor" })
+  res.status(200).json({
+    success: true,
+    doctors,
+  })
+})
+
+
+
+export const getUserDetails = catchAsyncErrors(async(req, res, next)=> {
+  const user = req.user
+  res.status(200).json({
+    success: true,
+    user,
+  })
+})
+
+
+export const logoutAdmin = catchAsyncErrors(async(req, res, next)=> {
+  res.status(200).cookie("AdminToken", "", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  }).json({
+    success: true,
+    message: "Admin logged out Successfully"
+  })
+})
+
+
+
+
+
+export const logoutPatient = catchAsyncErrors(async(req, res, next)=> {
+  res.status(200).cookie("PateintToken", "", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  }).json({
+    success: true,
+    message: "Patient logged out Successfully"
+  })
+})
