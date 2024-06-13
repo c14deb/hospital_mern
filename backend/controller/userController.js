@@ -182,7 +182,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
   }
 
   const isRegistered = await User.findOne({ email });
-  if (!isRegistered) {
+  if (isRegistered) {
     return next(
       new ErrorHandler("Doctor With This Email Already Exists!", 400)
     );
@@ -191,9 +191,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
   const cloudinaryResponse = await cloudinary.uploader.upload(docAvatar.tempFilePath);
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(
-      "Cloudinary Error:",
-      cloudinaryResponse.error || "Unknown Cloudinary error"
-    );
+      "Cloudinary Error:", cloudinaryResponse.error || "Unknown Cloudinary error");
     return next(
       new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
     );
@@ -219,3 +217,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
     doctor,
   });
 });
+
+
+
+
