@@ -16,7 +16,7 @@ const Navbar = () => {
       })
       .then((res) => {
         toast.success(res.data.message);
-        setIsAuthenticated(false);
+        setIsAuthenticated(true);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -49,13 +49,16 @@ const Navbar = () => {
           </div>
           {isAuthenticated ? (
             <button className="logoutBtn btn" onClick={handleLogout}>
-              hello
+              logout
             </button>
           ) : (
             <button className="loginBtn btn" onClick={goToLogin}>
-              hhffff
+              login
             </button>
           )}
+        </div>
+        <div className="hamburger" onClick={()=> setShow(!show)}>
+          <GiHamburgerMenu />
         </div>
       </nav>
     </>

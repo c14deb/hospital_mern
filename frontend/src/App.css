@@ -502,7 +502,7 @@ nav svg {
 }
 @media (max-width: 1100px) {
   nav {
-    background: #ffffffbf;
+    background: #ffffff;
     position: fixed;
     top: 0;
     left: 0;
@@ -521,7 +521,7 @@ nav svg {
     left: 0;
     height: 100%;
     width: 400px;
-    background: #ffffffbf;
+    background: #ffffff;
     top: 79px;
   }
   nav .showmenu {
