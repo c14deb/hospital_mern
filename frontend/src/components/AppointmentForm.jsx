@@ -157,7 +157,9 @@ const AppointmentForm = () => {
             <select
               value={`${doctorFirstName} ${doctorLastName}`}
               onChange={(e) => {
+                console.log(e.target.value)
                 const [firstName, lastName] = e.target.value.split(" ");
+                console.log([firstName, lastName]); 
                 setDoctorFirstName(firstName);
                 setDoctorLastName(lastName);
               }}

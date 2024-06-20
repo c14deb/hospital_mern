@@ -1,6 +1,7 @@
 import React from "react";
 import Hero from "../components/Hero";
 import AppointmentForm from "../components/AppointmentForm";
+import Footer from "../components/Footer";
 
 const Appointment = () => {
   return (
@@ -10,6 +11,7 @@ const Appointment = () => {
         imageUrl={"/signin.png"}
       />
       <AppointmentForm/>
+      <Footer />
     </>
   );
 };
